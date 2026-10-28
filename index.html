@@ -137,7 +137,7 @@ footer{background:var(--green);color:#e5e7dc;padding:22px clamp(18px,4vw,45px);d
           <section class="admin-page hidden" id="admin-settings">
             <div class="admin-heading"><h2>Настройки</h2></div>
             <div class="panel"><h3>Название газеты</h3><div class="panel-body"><div class="field"><label for="siteTitle">Название сайта</label><input id="siteTitle" value="Исламский Вестник Дома"></div><div class="field"><label for="siteSubtitle">Подзаголовок</label><input id="siteSubtitle" value="Газета для мусульманской семьи"></div><button class="btn" id="saveSettings">Сохранить настройки</button></div></div>
-            <div class="panel"><h3>Данные сайта</h3><div class="panel-body"><p class="muted">В этой версии статьи и рубрики хранятся в памяти браузера (localStorage) на этом устройстве.</p><button class="btn danger" id="exportData">Скачать резервную копию</button></div></div>
+            <div class="panel"><h3>Сохранение и резервная копия</h3><div class="panel-body"><p class="muted">Статьи, рубрики, настройки и статистика автоматически сохраняются в этом браузере. Регулярно скачивай резервную копию, чтобы не потерять данные при очистке браузера или смене устройства.</p><div class="row"><button class="btn" id="exportData">Скачать полную резервную копию</button><label class="btn outline" for="importDataFile" style="display:inline-flex;align-items:center;justify-content:center;cursor:pointer">Восстановить из копии</label><input id="importDataFile" type="file" accept="application/json,.json" hidden></div><p class="muted" style="font-size:.8rem;margin-top:12px">Резервная копия включает статьи, рубрики, настройки и журнал просмотров этого браузера.</p></div></div>
             <div class="notice warn"><strong>Важно:</strong> пароль в одностраничном HTML не обеспечивает настоящую защиту. Для публичного сайта нужна серверная авторизация и база данных.</div>
           </section>
         </div>
@@ -172,7 +172,7 @@ function getAnalytics(){try{const a=JSON.parse(localStorage.getItem(ANALYTICS_KE
 function recordArticleView(post){
   const events=getAnalytics();
   events.push({articleId:post.id,title:post.title,visitorId:getVisitorId(),openedAt:new Date().toISOString()});
-  try{localStorage.setItem(ANALYTICS_KEY,JSON.stringify(events.slice(-2000)))}catch(e){console.warn("Не удалось сохранить статистику",e)}
+  try{localStorage.setItem(ANALYTICS_KEY,JSON.stringify(events.slice(-5000)))}catch(e){console.warn("Не удалось сохранить статистику",e)}
 }
 function renderAnalytics(){
   const events=getAnalytics(), visitors=[...new Set(events.map(e=>e.visitorId))];
@@ -187,7 +187,10 @@ function renderAnalytics(){
 }
 
 function loadState(){try{const v=JSON.parse(localStorage.getItem(STORAGE_KEY));if(v&&Array.isArray(v.posts)&&Array.isArray(v.categories))return v}catch(e){}return {posts:[],categories:[],settings:{title:"Исламский Вестник Дома",subtitle:"Газета для мусульманской семьи"}}}
-function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll()}
+function saveState(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll();return true}
+ catch(err){console.error("Не удалось сохранить данные сайта",err);alert("Не удалось сохранить данные: хранилище браузера может быть заполнено. Скачай резервную копию и уменьши размер изображений.");return false}
+}
 function escapeHtml(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function showPublic(name){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));$("pub-"+name).classList.add("active");$("publicNav").classList.remove("hidden");document.querySelectorAll("#publicNav button").forEach(b=>b.classList.toggle("active",b.dataset.public===name));window.scrollTo({top:0,behavior:"smooth"});renderPublic()}
@@ -300,7 +303,27 @@ $("postImageInput").addEventListener("change",e=>{
 $("refreshAnalytics").addEventListener("click",renderAnalytics);
 $("clearAnalytics").addEventListener("click",()=>{if(confirm("Очистить статистику просмотров, сохранённую в этом браузере?")){localStorage.removeItem(ANALYTICS_KEY);renderAnalytics()}});
 $("saveSettings").addEventListener("click",()=>{state.settings.title=$("siteTitle").value.trim()||"Исламский Вестник Дома";state.settings.subtitle=$("siteSubtitle").value.trim()||"Газета для мусульманской семьи";saveState();alert("Настройки сохранены.")});
-$("exportData").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="islamic-gazette-backup.json";a.click();URL.revokeObjectURL(url)});
+function downloadBackup(){
+ const backup={format:"islamic-gazette-backup",version:2,createdAt:new Date().toISOString(),state,analytics:getAnalytics()};
+ const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="islamic-gazette-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+$("exportData").addEventListener("click",downloadBackup);
+$("importDataFile").addEventListener("change",async e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ try{
+  const imported=JSON.parse(await file.text());
+  const importedState=imported&&imported.format==="islamic-gazette-backup"?imported.state:imported;
+  if(!importedState||!Array.isArray(importedState.posts)||!Array.isArray(importedState.categories))throw new Error("Неверный формат резервной копии");
+  if(!confirm("Восстановить данные из файла? Текущие статьи и рубрики будут заменены содержимым копии."))return;
+  state={posts:importedState.posts,categories:importedState.categories,settings:importedState.settings||{title:"Исламский Вестник Дома",subtitle:"Газета для мусульманской семьи"}};
+  if(!saveState())return;
+  if(imported.format==="islamic-gazette-backup"&&Array.isArray(imported.analytics))localStorage.setItem(ANALYTICS_KEY,JSON.stringify(imported.analytics.slice(-5000)));
+  renderAll();alert("Резервная копия восстановлена.");
+ }catch(err){alert("Не удалось восстановить копию. Проверь, что выбран JSON-файл резервной копии этого сайта.");console.error(err)}
+ finally{e.target.value=""}
+});
+window.addEventListener("pagehide",()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));localStorage.setItem(ANALYTICS_KEY,JSON.stringify(getAnalytics().slice(-5000)))}catch(e){console.warn("Автосохранение перед закрытием не удалось",e)}});
 document.addEventListener("click",e=>{
  const edit=e.target.closest("[data-edit-post]");if(edit)editPost(edit.dataset.editPost);
  const del=e.target.closest("[data-delete-post]");if(del&&confirm("Удалить эту статью?")){state.posts=state.posts.filter(p=>p.id!==del.dataset.deletePost);saveState()}
