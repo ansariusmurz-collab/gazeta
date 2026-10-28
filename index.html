@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Исламский Вестник Дома</title>
+<style>
+:root{--green:#104b3b;--deep:#0a382d;--gold:#c5ad76;--paper:#f8f7f1;--white:#fffef9;--ink:#24312a;--muted:#68736c;--line:#ddd8c8;--red:#a23b35}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.55}button,input,textarea,select{font:inherit}button{cursor:pointer}
+.site{width:min(1120px,calc(100% - 30px));margin:26px auto;background:var(--white);border:1px solid #e5e1d5;box-shadow:0 12px 35px #14302512;min-height:calc(100vh - 52px)}
+.masthead{background:var(--green);color:#f7f1df;padding:25px clamp(18px,4vw,52px);border-bottom:4px solid var(--gold);display:flex;justify-content:space-between;align-items:center;gap:18px}.masthead h1{font-size:clamp(1.6rem,4vw,2.65rem);line-height:1.1;font-weight:500;margin:0}.masthead p{font: .9rem Arial,sans-serif;color:#e0e4d8;margin:8px 0 0}.issue{text-align:right;font: .8rem Arial,sans-serif;color:#e4dfcc}.crescent{font-size:2rem;color:var(--gold);display:block}
+nav{display:flex;justify-content:center;flex-wrap:wrap;padding:0 15px;border-bottom:1px solid var(--line)}nav button{border:0;background:transparent;padding:15px 18px 12px;text-transform:uppercase;font:600 .82rem Arial,sans-serif;border-bottom:3px solid transparent;color:#38433c}nav button:hover,nav button.active{color:var(--green);border-bottom-color:var(--gold)}
+main{padding:clamp(22px,4vw,45px)}.view{display:none}.view.active{display:block}.eyebrow{font:700 .72rem Arial,sans-serif;color:#9d854f;letter-spacing:1.4px;text-transform:uppercase;margin:0 0 8px}.title{color:var(--green);font-size:clamp(2rem,4vw,2.8rem);line-height:1.12;font-weight:500;margin:0 0 12px}.lead{max-width:760px;color:var(--muted);margin:0 0 26px;font-size:1.05rem}
+.hero{background:var(--deep);color:#fffdf5;padding:clamp(25px,5vw,48px);border-radius:4px}.hero h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.16;font-weight:500;margin:0 0 12px;max-width:760px}.hero p{color:#e1e8df;max-width:700px}.btn{border:1px solid var(--gold);background:var(--gold);color:#19382d;padding:10px 15px;border-radius:3px;font:700 .82rem Arial,sans-serif}.btn:hover{filter:brightness(1.05)}.btn.outline{background:transparent;color:var(--green);border-color:var(--green)}.btn.danger{background:#fff5f3;border-color:#dfb4af;color:var(--red)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:32px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line)}.section-head h2{margin:0;color:var(--green);font-size:1.45rem;font-weight:500}.muted{color:var(--muted)}.empty{padding:26px;border:1px dashed var(--line);color:var(--muted);text-align:center;background:#fffefa}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);padding:20px;background:#fffefa}.card .tag{font:700 .7rem Arial,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#9d854f}.card h3{color:var(--green);font-size:1.25rem;line-height:1.25;margin:8px 0}.card p{color:var(--muted);font-size:.95rem}.article-content{overflow-wrap:anywhere}.article-content img{max-width:100%;height:auto;display:block;margin:18px auto}.article-content blockquote{border-left:3px solid var(--gold);padding:8px 16px;background:#f5f4ec}.article-content a{color:#176a53;text-decoration:underline}.linkbtn{padding:0;border:0;background:none;color:#9d854f;font:700 .78rem Arial,sans-serif;text-transform:uppercase}
+footer{background:var(--green);color:#e5e7dc;padding:22px clamp(18px,4vw,45px);display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;font: .78rem Arial,sans-serif}.footbrand{color:var(--gold);font:1.1rem Georgia,serif}.owner-area{display:flex;align-items:center;gap:9px}.owner-button{border:1px solid #b7c8bd;background:#0c3d30;color:#fff;padding:6px 10px;border-radius:3px;font: .72rem Arial,sans-serif}.owner-button:hover{background:#1b5a45}
+.field{display:grid;gap:6px;margin:0 0 14px}.field label{font:700 .82rem Arial,sans-serif;color:#425047}.field input,.field textarea,.field select,.search{width:100%;padding:11px 12px;border:1px solid #d6d1c2;background:#fff;border-radius:3px;outline:none;font: .95rem Arial,sans-serif}.field input:focus,.field textarea:focus,.field select:focus,.search:focus{border-color:#9d854f;box-shadow:0 0 0 2px #c5ad7622}.field textarea{min-height:220px;resize:vertical}.row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1;min-width:170px}.notice{padding:12px 14px;margin:12px 0;background:#edf3eb;border-left:3px solid var(--gold);color:var(--green)}.notice.warn{background:#fff5e8;color:#725020}.hidden{display:none!important}
+.admin{margin:-45px;padding:0;min-height:650px;background:#f4f5f2;display:grid;grid-template-columns:210px minmax(0,1fr)}.sidebar{background:linear-gradient(180deg,#104b3b,#0b392e);color:#dfe9e1;padding:22px 0}.side-logo{padding:0 18px 22px;font-size:1.05rem;color:#f7f1df;border-bottom:1px solid #ffffff18}.side-label{padding:17px 18px 7px;font:700 .68rem Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:#8eb4a0}.side-btn{width:100%;text-align:left;border:0;background:transparent;color:#dbe5dd;padding:11px 18px;font: .88rem Arial,sans-serif}.side-btn:hover,.side-btn.active{background:#ffffff12;border-left:3px solid var(--gold);padding-left:15px;color:#fff}.admin-main{min-width:0}.admin-top{height:56px;padding:0 22px;background:#fff;border-bottom:1px solid #e4e5df;display:flex;align-items:center;justify-content:space-between;font: .82rem Arial,sans-serif}.admin-content{padding:clamp(18px,3vw,32px)}.admin-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}.admin-heading h2{margin:0;color:var(--green);font-size:clamp(1.55rem,3vw,2rem);font-weight:600}.admin-layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:18px}.editor-title{font-size:1.65rem;width:100%;padding:13px 15px;border:1px solid #d5d0c0;background:#fff;border-radius:4px;margin-bottom:16px}.editor{background:#fff;border:1px solid #d5d0c0;border-radius:4px;overflow:hidden}.toolbar{display:flex;gap:4px;flex-wrap:wrap;padding:8px;border-bottom:1px solid #e6e3d8;background:#fbfaf6}.tool{min-width:31px;height:30px;border:0;border-radius:3px;background:transparent;color:#35433b;font:700 .9rem Arial,sans-serif}.tool:hover{background:#e9eee9}.rich-editor{display:block;width:100%;min-height:360px;padding:18px 15px;outline:none;font:1rem/1.7 Georgia,serif;overflow-wrap:anywhere;background:#fff}
+.rich-editor:empty:before{content:attr(data-placeholder);color:#999;pointer-events:none}
+.rich-editor:focus{box-shadow:inset 0 0 0 2px #c5ad7620}
+.rich-editor h2,.rich-editor h3{color:var(--green);line-height:1.25}
+.rich-editor blockquote{margin:16px 0;padding:10px 16px;border-left:3px solid var(--gold);background:#f5f4ec;color:#526057}
+.rich-editor img{display:block;max-width:100%;height:auto;max-height:700px;object-fit:contain;margin:16px auto;border-radius:3px}
+.rich-editor a{color:#176a53;text-decoration:underline}
+.rich-editor ul,.rich-editor ol{padding-left:28px}
+.rich-editor p{margin:0 0 12px}
+.upload-tool{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem}
+.upload-tool:hover{background:#e9eee9}.panel{border:1px solid #d7d2c2;background:#fff;border-radius:5px;margin-bottom:14px;box-shadow:0 2px 5px #00000006}.panel h3{font-size:1rem;font-weight:500;margin:0;padding:11px 12px;border-bottom:1px solid #e4dfd1;background:#fbfaf6}.panel-body{padding:12px}.panel-body .btn{font-size:.72rem;padding:9px 10px}.check{display:flex;align-items:center;gap:8px;margin:9px 0;font: .84rem Arial,sans-serif}.check input{accent-color:var(--green)}.admin-table{width:100%;border-collapse:collapse;background:white;font: .86rem Arial,sans-serif}.admin-table th,.admin-table td{text-align:left;padding:12px 10px;border-bottom:1px solid #e5e2d8}.admin-table th{background:#f7f6f0;color:#425047}.admin-table td:first-child{font-weight:600;color:var(--green)}.table-wrap{overflow-x:auto;border:1px solid #e1ddcf}.tiny-actions{display:flex;gap:6px;flex-wrap:wrap}.tiny-actions button{font-size:.72rem;padding:6px 8px}.archive-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);background:#fff;margin:10px 0}.archive-item h3{margin:0;color:var(--green)}.archive-item p{margin:4px 0 0;color:var(--muted);font-size:.85rem}.article-content{overflow-wrap:anywhere}.article-content img{max-width:100%;height:auto;display:block;margin:18px auto;border-radius:4px}.article-content a{color:#176a53;text-decoration:underline}.article-content blockquote{border-left:3px solid var(--gold);margin:16px 0;padding:10px 16px;background:#f5f4ec}.dashboard-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:20px}.stat{padding:18px;background:#fff;border:1px solid #e0dccf}.stat span{display:block;color:var(--muted);font: .8rem Arial,sans-serif}.stat strong{display:block;font-size:1.8rem;color:var(--green);margin-top:4px}.login-backdrop{position:fixed;inset:0;background:#081c16b8;display:flex;align-items:center;justify-content:center;padding:18px;z-index:100}.login-box{background:#fffef9;border-top:5px solid var(--gold);padding:26px;width:min(410px,100%);box-shadow:0 20px 70px #0004}.login-box h2{color:var(--green);font-weight:500;margin:0 0 8px}.login-box p{color:var(--muted);font-size:.92rem}.login-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+@media(max-width:850px){.admin{grid-template-columns:165px minmax(0,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.panel{margin:0}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.site{width:100%;margin:0;border:0}.masthead{align-items:flex-start}.issue{max-width:95px;font-size:.7rem}.crescent{font-size:1.5rem}nav{justify-content:flex-start;padding:0 5px}nav button{padding:13px 10px 10px;font-size:.7rem}main{padding:20px 16px 28px}.cards{grid-template-columns:1fr}.admin{margin:-20px -16px -28px;grid-template-columns:1fr}.sidebar{padding:8px;display:flex;flex-wrap:wrap;gap:4px}.side-logo,.side-label{display:none}.side-btn{width:auto;flex:1;text-align:center;padding:9px 7px;font-size:.75rem;border-radius:3px}.side-btn:hover,.side-btn.active{border-left:0;border-bottom:2px solid var(--gold);padding:9px 7px}.admin-top{height:48px;padding:0 13px}.admin-content{padding:18px 12px}.admin-side-panels{grid-template-columns:1fr}.dashboard-stats{grid-template-columns:1fr}.rich-editor{min-height:260px}.admin-heading{align-items:flex-start}.admin-heading .btn{width:100%}.row>*{min-width:100%}.owner-area{width:100%;justify-content:space-between}}
+</style>
+</head>
+<body>
+<div class="site">
+<header class="masthead">
+  <div><h1>Исламский Вестник Дома</h1><p>Газета для мусульманской семьи</p></div>
+  <div class="issue"><span class="crescent">☾</span>Выпуск №23 | Октябрь 2026</div>
+</header>
+<nav id="publicNav">
+  <button class="active" data-public="home">Главная</button>
+  <button data-public="articles">Статьи</button>
+  <button data-public="categories">Рубрики</button>
+  <button data-public="archive">Архив</button>
+  <button data-public="about">О нас</button>
+</nav>
+<main>
+  <section class="view active" id="pub-home">
+    <div class="hero"><p class="eyebrow">Добро пожаловать</p><h2>Знания, семейные ценности и добрые советы</h2><p>Электронная газета для мусульманской семьи. Здесь будут появляться статьи, которые владелец добавит через панель управления.</p><button class="btn" data-open-public="articles">Перейти к статьям</button></div>
+    <div class="section-head"><h2>Последние статьи</h2><span class="muted">НОВЫЕ ПУБЛИКАЦИИ</span></div>
+    <div id="homeArticles" class="cards"></div>
+    <div id="homeArticlesEmpty" class="empty">Пока статей нет. Владелец сайта сможет добавить их через кнопку «Владелец» внизу страницы.</div>
+    <div class="section-head"><h2>Наши рубрики</h2><span class="muted">ТЕМЫ ГАЗЕТЫ</span></div>
+    <div id="homeCategories" class="cards"></div>
+    <div id="homeCategoriesEmpty" class="empty">Рубрики пока не созданы.</div>
+  </section>
+  <section class="view" id="pub-articles"><p class="eyebrow">Библиотека публикаций</p><h2 class="title">Статьи</h2><p class="lead">Все опубликованные материалы газеты.</p><input class="search" id="publicSearch" placeholder="Поиск по заголовкам статей…" aria-label="Поиск по статьям"><div id="publicArticles" class="cards" style="margin-top:18px"></div><div id="publicArticlesEmpty" class="empty">Пока опубликованных статей нет.</div><article id="publicArticleDetail" class="hidden"></article></section>
+  <section class="view" id="pub-categories"><p class="eyebrow">Темы газеты</p><h2 class="title">Рубрики</h2><p class="lead">Выберите рубрику, чтобы посмотреть статьи.</p><div id="publicCategories" class="cards"></div><div id="publicCategoriesEmpty" class="empty">Рубрики пока не созданы.</div></section>
+  <section class="view" id="pub-archive"><p class="eyebrow">Предыдущие номера</p><h2 class="title">Архив</h2><p class="lead">Здесь будут собираться публикации и выпуски газеты.</p><div class="empty">Архив пока пуст. Добавленные статьи будут доступны в разделе «Статьи».</div></section>
+  <section class="view" id="pub-about"><p class="eyebrow">Наша редакция</p><h2 class="title">О нас</h2><p class="lead">«Исламский Вестник Дома» — семейная газета о знаниях, воспитании, нравственности и повседневной жизни.</p><div class="hero"><h2 style="font-size:1.7rem">Наша цель</h2><p>Создавать удобное пространство для чтения и полезных материалов для всей семьи.</p></div></section>
+
+  <section class="view" id="admin-view">
+    <div class="admin">
+      <aside class="sidebar">
+        <div class="side-logo">☾ Вестник · Панель</div>
+        <div class="side-label">Управление</div>
+        <button class="side-btn active" data-admin="dashboard">▦ &nbsp;Панель</button>
+        <button class="side-btn" data-admin="posts">✎ &nbsp;Статьи</button>
+        <button class="side-btn" data-admin="categories">▤ &nbsp;Рубрики</button>
+        <button class="side-btn" data-admin="analytics">◷ &nbsp;Просмотры статей</button>
+        <button class="side-btn" data-admin="settings">⚙ &nbsp;Настройки</button>
+        <button class="side-btn" id="exitAdmin">↩ &nbsp;На сайт</button>
+      </aside>
+      <div class="admin-main">
+        <div class="admin-top"><span id="adminCrumb">Панель управления</span><span>Владелец сайта</span></div>
+        <div class="admin-content">
+          <section class="admin-page" id="admin-dashboard">
+            <div class="admin-heading"><h2>Панель управления</h2><button class="btn" id="newPostFromDashboard">＋ Создать статью</button></div>
+            <p class="muted">Добро пожаловать в редактор газеты. Здесь можно создавать статьи и рубрики, изменять публикации и управлять тем, что видят читатели.</p>
+            <div class="dashboard-stats"><div class="stat"><span>Всего статей</span><strong id="statPosts">0</strong></div><div class="stat"><span>Рубрик</span><strong id="statCats">0</strong></div><div class="stat"><span>Опубликовано</span><strong id="statPublished">0</strong></div></div>
+            <div class="section-head"><h2>Последние статьи</h2><button class="btn outline" data-admin="posts">Все статьи</button></div>
+            <div id="dashboardRecent" class="empty">Статей пока нет. Нажми «Создать статью», чтобы добавить первую.</div>
+          </section>
+          <section class="admin-page hidden" id="admin-posts">
+            <div class="admin-heading"><h2>Статьи</h2><button class="btn" id="newPost">＋ Добавить новую</button></div>
+            <div class="field"><input id="adminPostSearch" placeholder="Найти статью…" aria-label="Найти статью"></div>
+            <div class="table-wrap"><table class="admin-table"><thead><tr><th>Заголовок</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="postsTable"></tbody></table></div>
+            <div id="postsEmpty" class="empty">Статей пока нет. Нажми «Добавить новую».</div>
+          </section>
+          <section class="admin-page hidden" id="admin-editor">
+            <div class="admin-heading"><h2 id="editorHeading">Добавить новую статью</h2><button class="btn outline" id="cancelEditor">← Все статьи</button></div>
+            <div class="admin-layout">
+              <div>
+                <input class="editor-title" id="postTitle" placeholder="Заголовок статьи" maxlength="180">
+                <div class="editor">
+                  <div class="toolbar">
+                    <button class="tool" type="button" data-format="bold" title="Жирный"><b>B</b></button>
+                    <button class="tool" type="button" data-format="italic" title="Курсив"><i>I</i></button>
+                    <button class="tool" type="button" data-format="underline" title="Подчёркнутый"><u>U</u></button>
+                    <button class="tool" type="button" data-format="strikeThrough" title="Зачёркнутый"><s>S</s></button>
+                    <button class="tool" type="button" data-format="h2" title="Заголовок 2">H2</button>
+                    <button class="tool" type="button" data-format="h3" title="Заголовок 3">H3</button>
+                    <button class="tool" type="button" data-format="ul" title="Маркированный список">☷</button>
+                    <button class="tool" type="button" data-format="ol" title="Нумерованный список">1.</button>
+                    <button class="tool" type="button" data-format="quote" title="Цитата">❝</button>
+                    <button class="tool" type="button" data-format="link" title="Добавить ссылку">↗</button>
+                    <button class="tool" type="button" data-format="unlink" title="Убрать ссылку">×↗</button>
+                    <button class="tool" type="button" data-format="justifyLeft" title="По левому краю">☰</button>
+                    <button class="tool" type="button" data-format="justifyCenter" title="По центру">≡</button>
+                    <button class="tool" type="button" data-format="undo" title="Отменить">↶</button>
+                    <button class="tool" type="button" data-format="redo" title="Повторить">↷</button>
+                    <label class="tool upload-tool" title="Добавить изображение">▧<input id="postImageInput" type="file" accept="image/*" hidden></label>
+                  </div>
+                  <div id="postBody" class="rich-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Начните писать вашу статью здесь…"></div>
+                </div>
+                <p class="muted" style="font: .78rem Arial,sans-serif">Выделите текст и нажмите кнопку форматирования. Изображения можно загружать с компьютера и вставлять прямо в статью.</p>
+              </div>
+              <aside class="admin-side-panels">
+                <div class="panel"><h3>Опубликовать</h3><div class="panel-body"><div class="muted" style="font-size:.82rem;margin-bottom:10px">Статус публикации</div><select id="postStatus" class="field-input" style="width:100%;padding:9px;border:1px solid var(--line);margin-bottom:12px"><option value="draft">Черновик</option><option value="published">Опубликовано</option></select><div class="row"><button class="btn outline" id="saveDraft">Сохранить</button><button class="btn" id="publishPost">Готово</button></div></div></div>
+                <div class="panel"><h3>Рубрики</h3><div class="panel-body" id="editorCategoryChecks"><p class="muted" style="font-size:.82rem">Сначала создайте рубрику в меню «Рубрики».</p></div><div class="panel-body" style="padding-top:0"><button class="linkbtn" id="quickAddCategory">＋ Добавить рубрику</button></div></div>
+                <div class="panel"><h3>Метки записи</h3><div class="panel-body"><input id="postTags" placeholder="Например: семья, знания" style="width:100%;padding:9px;border:1px solid var(--line)"></div></div>
+              </aside>
+            </div>
+          </section>
+          <section class="admin-page hidden" id="admin-categories">
+            <div class="admin-heading"><h2>Рубрики</h2><button class="btn" id="addCategory">＋ Создать рубрику</button></div>
+            <p class="muted">Рубрики помогают сортировать публикации по темам.</p>
+            <div class="row" style="margin:18px 0"><div class="field"><label for="categoryName">Название рубрики</label><input id="categoryName" placeholder="Например: Духовный совет"></div><div class="field"><label for="categoryDescription">Описание</label><input id="categoryDescription" placeholder="Короткое описание"></div><div style="align-self:end;margin-bottom:14px"><button class="btn" id="saveCategory">Сохранить рубрику</button></div></div>
+            <div id="categoryAdminList"></div><div id="categoriesEmpty" class="empty">Рубрик пока нет. Создай первую рубрику выше.</div>
+          </section>
+          <section class="admin-page hidden" id="admin-analytics">
+            <div class="admin-heading"><h2>Просмотры статей</h2><button class="btn outline" id="refreshAnalytics">Обновить</button></div>
+            <div class="notice warn"><strong>Ограничение демо-версии:</strong> статистика собирается только в этом браузере. Посетители обозначаются анонимными ID, а не настоящими именами. Чтобы видеть просмотры всех людей с разных устройств, сайту нужна общая база данных и серверная авторизация.</div>
+            <div class="dashboard-stats"><div class="stat"><span>Всего открытий</span><strong id="analyticsTotal">0</strong></div><div class="stat"><span>Статей открывали</span><strong id="analyticsArticles">0</strong></div><div class="stat"><span>Анонимных посетителей</span><strong id="analyticsVisitors">0</strong></div></div>
+            <div class="section-head"><h2>По статьям</h2></div><div id="analyticsByArticle" class="table-wrap"></div>
+            <div class="section-head"><h2>Последние открытия</h2></div><div id="analyticsEvents" class="table-wrap"></div>
+            <button class="btn danger" id="clearAnalytics">Очистить статистику этого браузера</button>
+          </section>
+          <section class="admin-page hidden" id="admin-settings">
+            <div class="admin-heading"><h2>Настройки</h2></div>
+            <div class="panel"><h3>Название газеты</h3><div class="panel-body"><div class="field"><label for="siteTitle">Название сайта</label><input id="siteTitle" value="Исламский Вестник Дома"></div><div class="field"><label for="siteSubtitle">Подзаголовок</label><input id="siteSubtitle" value="Газета для мусульманской семьи"></div><button class="btn" id="saveSettings">Сохранить настройки</button></div></div>
+            <div class="panel"><h3>Данные сайта</h3><div class="panel-body"><p class="muted">В этой версии статьи и рубрики хранятся в памяти браузера (localStorage) на этом устройстве.</p><button class="btn danger" id="exportData">Скачать резервную копию</button></div></div>
+            <div class="notice warn"><strong>Важно:</strong> пароль в одностраничном HTML не обеспечивает настоящую защиту. Для публичного сайта нужна серверная авторизация и база данных.</div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div><div class="footbrand" id="footerTitle">Исламский Вестник Дома</div><div id="footerSubtitle">Газета для мусульманской семьи</div></div><div>© 2026 · Семейная газета</div><div class="owner-area"><span>Доступ к редактору</span><button class="owner-button" id="ownerButton">Владелец</button></div></footer>
+</div>
+
+<div id="loginModal" class="login-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <form class="login-box" id="loginForm"><h2 id="loginTitle">Вход владельца</h2><p>Введите пароль, чтобы открыть панель управления газетой.</p><div class="field"><label for="ownerPassword">Пароль</label><input id="ownerPassword" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Введите пароль" required></div><div id="loginError" class="notice warn hidden">Неверный пароль. Попробуйте ещё раз.</div><div class="login-actions"><button class="btn outline" type="button" id="cancelLogin">Отмена</button><button class="btn" type="submit">Войти</button></div></form>
+</div>
+<script>
+/*
+  ДЕМО-ВЕРСИЯ. Пароль находится в клиентском коде, поэтому его можно увидеть в исходнике.
+  Не используйте такой способ для защиты реального публичного сайта.
+  Для настоящей приватности перенесите проверку пароля на сервер.
+*/
+const OWNER_PASSWORD = "04101960";
+const STORAGE_KEY = "islamicGazetteCms_v1";
+let state = loadState();
+let editingId = null, editingCategoryId = null;
+const $ = id => document.getElementById(id);
+const ANALYTICS_KEY = "islamicGazetteAnalytics_v1";
+function getVisitorId(){
+  let id=localStorage.getItem("islamicGazetteVisitorId_v1");
+  if(!id){id="Гость-"+Math.random().toString(36).slice(2,8).toUpperCase();localStorage.setItem("islamicGazetteVisitorId_v1",id)}
+  return id;
+}
+function getAnalytics(){try{const a=JSON.parse(localStorage.getItem(ANALYTICS_KEY)||"[]");return Array.isArray(a)?a:[]}catch(e){return []}}
+function recordArticleView(post){
+  const events=getAnalytics();
+  events.push({articleId:post.id,title:post.title,visitorId:getVisitorId(),openedAt:new Date().toISOString()});
+  try{localStorage.setItem(ANALYTICS_KEY,JSON.stringify(events.slice(-2000)))}catch(e){console.warn("Не удалось сохранить статистику",e)}
+}
+function renderAnalytics(){
+  const events=getAnalytics(), visitors=[...new Set(events.map(e=>e.visitorId))];
+  $("analyticsTotal").textContent=events.length;
+  $("analyticsArticles").textContent=new Set(events.map(e=>e.articleId)).size;
+  $("analyticsVisitors").textContent=visitors.length;
+  const counts={};events.forEach(e=>{if(!counts[e.articleId])counts[e.articleId]={title:e.title,count:0,last:e.openedAt};counts[e.articleId].count++;if(e.openedAt>counts[e.articleId].last)counts[e.articleId].last=e.openedAt});
+  const byArticle=Object.entries(counts).sort((a,b)=>b[1].count-a[1].count);
+  $("analyticsByArticle").innerHTML=byArticle.length?`<table class="admin-table"><thead><tr><th>Статья</th><th>Открытий</th><th>Последнее открытие</th></tr></thead><tbody>${byArticle.map(([id,v])=>`<tr><td>${escapeHtml(v.title)}</td><td>${v.count}</td><td>${new Date(v.last).toLocaleString("ru-RU")}</td></tr>`).join("")}</tbody></table>`:'<div class="empty">Пока нет просмотров статей в этом браузере.</div>';
+  const latest=events.slice().reverse().slice(0,100);
+  $("analyticsEvents").innerHTML=latest.length?`<table class="admin-table"><thead><tr><th>Статья</th><th>Посетитель (анонимно)</th><th>Дата и время</th></tr></thead><tbody>${latest.map(e=>`<tr><td>${escapeHtml(e.title)}</td><td>${escapeHtml(e.visitorId)}</td><td>${new Date(e.openedAt).toLocaleString("ru-RU")}</td></tr>`).join("")}</tbody></table>`:'<div class="empty">История открытий пока пуста.</div>';
+}
+
+function loadState(){try{const v=JSON.parse(localStorage.getItem(STORAGE_KEY));if(v&&Array.isArray(v.posts)&&Array.isArray(v.categories))return v}catch(e){}return {posts:[],categories:[],settings:{title:"Исламский Вестник Дома",subtitle:"Газета для мусульманской семьи"}}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll()}
+function escapeHtml(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function showPublic(name){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));$("pub-"+name).classList.add("active");$("publicNav").classList.remove("hidden");document.querySelectorAll("#publicNav button").forEach(b=>b.classList.toggle("active",b.dataset.public===name));window.scrollTo({top:0,behavior:"smooth"});renderPublic()}
+function enterAdmin(){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));$("admin-view").classList.add("active");$("publicNav").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"});showAdmin("dashboard");renderAll()}
+function exitAdmin(){showPublic("home")}
+function showAdmin(name){document.querySelectorAll(".admin-page").forEach(x=>x.classList.add("hidden"));$("admin-"+name).classList.remove("hidden");document.querySelectorAll(".side-btn[data-admin]").forEach(b=>b.classList.toggle("active",b.dataset.admin===name));const labels={dashboard:"Панель управления",posts:"Статьи",categories:"Рубрики",analytics:"Просмотры статей",settings:"Настройки",editor:editingId?"Редактировать статью":"Создать статью"};$("adminCrumb").textContent=labels[name]||"Панель управления";if(name==="posts")renderPostsTable();if(name==="categories")renderCategoryAdmin();if(name==="analytics")renderAnalytics();if(name==="editor")renderEditorCategories()}
+function renderPublic(){
+ const published=state.posts.filter(p=>p.status==="published");
+ $("homeArticles").innerHTML=published.slice().reverse().slice(0,3).map(postCard).join("");$("homeArticlesEmpty").classList.toggle("hidden",published.length>0);
+ $("publicArticles").innerHTML=published.filter(p=>(p.title+" "+p.body+" "+p.tags).toLowerCase().includes(($("publicSearch").value||"").toLowerCase())).slice().reverse().map(postCard).join("");$("publicArticlesEmpty").classList.toggle("hidden",published.length>0);
+ const cats=state.categories;
+ $("homeCategories").innerHTML=cats.slice(0,3).map(categoryCard).join("");$("homeCategoriesEmpty").classList.toggle("hidden",cats.length>0);
+ $("publicCategories").innerHTML=cats.map(c=>`<article class="card"><span class="tag">Рубрика</span><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.description||"Материалы этой рубрики.")}</p><button class="linkbtn" data-category-open="${c.id}">Смотреть статьи →</button></article>`).join("");$("publicCategoriesEmpty").classList.toggle("hidden",cats.length>0);
+}
+function postCard(p){const cat=state.categories.find(c=>c.id===p.categoryId);const plain=htmlToText(p.body||"");return `<article class="card"><span class="tag">${escapeHtml(cat?cat.name:"Статья")}</span><h3>${escapeHtml(p.title)}</h3><p>${escapeHtml(plain.slice(0,150))}${plain.length>150?"…":""}</p><button class="linkbtn" type="button" data-read-post="${escapeHtml(p.id)}">Читать →</button></article>`}
+function htmlToText(html){const box=document.createElement("div");box.innerHTML=html;return (box.textContent||box.innerText||"").replace(/\\s+/g," ").trim()}
+function openArticle(id){
+ showPublic("articles");
+ const p=state.posts.find(x=>x.id===id&&x.status==="published");if(!p)return;
+ recordArticleView(p);
+ $("publicArticleDetail").classList.remove("hidden");
+ $("publicArticleDetail").innerHTML=`<button class="btn outline" id="backPublicArticles" type="button">← Все статьи</button><p class="eyebrow" style="margin-top:24px">Публикация</p><h2 class="title">${escapeHtml(p.title)}</h2><div class="article-content" style="line-height:1.8">${p.body||""}</div>`;
+ $("publicArticles").classList.add("hidden");$("publicArticlesEmpty").classList.add("hidden");$("publicSearch").classList.add("hidden");
+ $("publicArticleDetail").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function categoryCard(c){return `<article class="card"><span class="tag">Рубрика</span><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.description||"Полезные материалы для всей семьи.")}</p><button class="linkbtn" data-category-open="${c.id}">Открыть рубрику →</button></article>`}
+function renderAll(){renderPublic();$("statPosts").textContent=state.posts.length;$("statCats").textContent=state.categories.length;$("statPublished").textContent=state.posts.filter(p=>p.status==="published").length;renderPostsTable();renderCategoryAdmin();renderEditorCategories();$("footerTitle").textContent=state.settings.title;$("footerSubtitle").textContent=state.settings.subtitle;document.querySelector(".masthead h1").textContent=state.settings.title;document.querySelector(".masthead p").textContent=state.settings.subtitle;const recent=state.posts.slice().reverse().slice(0,5);$("dashboardRecent").classList.toggle("empty",recent.length===0);$("dashboardRecent").innerHTML=recent.length?`<div class="table-wrap"><table class="admin-table"><thead><tr><th>Статья</th><th>Статус</th><th>Действие</th></tr></thead><tbody>${recent.map(p=>`<tr><td>${escapeHtml(p.title||"Без заголовка")}</td><td>${p.status==="published"?"Опубликовано":"Черновик"}</td><td><button class="btn outline" data-edit-post="${p.id}">Изменить</button></td></tr>`).join("")}</tbody></table></div>`:"Статей пока нет. Нажми «Создать статью», чтобы добавить первую."}
+function renderPostsTable(){if(!$("postsTable"))return;const q=($("adminPostSearch")?.value||"").toLowerCase();const posts=state.posts.filter(p=>p.title.toLowerCase().includes(q)).slice().reverse();$("postsTable").innerHTML=posts.map(p=>`<tr><td>${escapeHtml(p.title||"Без заголовка")}</td><td>${p.status==="published"?"Опубликовано":"Черновик"}</td><td><div class="tiny-actions"><button class="btn outline" data-edit-post="${p.id}">Изменить</button><button class="btn danger" data-delete-post="${p.id}">Удалить</button></div></td></tr>`).join("");$("postsEmpty").classList.toggle("hidden",posts.length>0)}
+function renderCategoryAdmin(){if(!$("categoryAdminList"))return;$("categoryAdminList").innerHTML=state.categories.map(c=>`<div class="archive-item"><div><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.description||"Без описания")} · Статей: ${state.posts.filter(p=>p.categoryId===c.id).length}</p></div><div class="tiny-actions"><button class="btn outline" data-edit-category="${c.id}">Изменить</button><button class="btn danger" data-delete-category="${c.id}">Удалить</button></div></div>`).join("");$("categoriesEmpty").classList.toggle("hidden",state.categories.length>0)}
+function renderEditorCategories(){const box=$("editorCategoryChecks");if(!box)return;if(!state.categories.length){box.innerHTML='<p class="muted" style="font-size:.82rem">Сначала создайте рубрику в меню «Рубрики».</p>';return}box.innerHTML=state.categories.map(c=>`<label class="check"><input type="radio" name="postCategory" value="${c.id}" ${getEditingCategory()===c.id?"checked":""}> ${escapeHtml(c.name)}</label>`).join("")}
+function getEditingCategory(){return editingId?state.posts.find(p=>p.id===editingId)?.categoryId||"":""}
+function newPost(){editingId=null;savedEditorRange=null;$("editorHeading").textContent="Добавить новую статью";$("postTitle").value="";$("postBody").innerHTML="";$("postTags").value="";$("postStatus").value="draft";showAdmin("editor")}
+function editPost(id){const p=state.posts.find(x=>x.id===id);if(!p)return;savedEditorRange=null;editingId=id;$("editorHeading").textContent="Редактировать статью";$("postTitle").value=p.title;$("postBody").innerHTML=p.body||"";$("postTags").value=p.tags||"";$("postStatus").value=p.status;showAdmin("editor");document.querySelectorAll('input[name="postCategory"]').forEach(r=>r.checked=r.value===p.categoryId)}
+function savePost(status){const title=$("postTitle").value.trim(),body=$("postBody").innerHTML.trim();if(!title){alert("Введите заголовок статьи.");$("postTitle").focus();return}const category=document.querySelector('input[name="postCategory"]:checked')?.value||"";const post={id:editingId||uid(),title,body,tags:$("postTags").value.trim(),status,categoryId:category,updatedAt:new Date().toISOString()};if(editingId){const i=state.posts.findIndex(p=>p.id===editingId);if(i>=0)state.posts[i]=post}else state.posts.push(post);saveState();showAdmin("posts");alert(status==="published"?"Статья опубликована на сайте.":"Черновик сохранён.")}
+function addCategory(){const name=$("categoryName").value.trim(),description=$("categoryDescription").value.trim();if(!name){alert("Введите название рубрики.");$("categoryName").focus();return}if(editingCategoryId){const c=state.categories.find(x=>x.id===editingCategoryId);if(c){c.name=name;c.description=description}}else state.categories.push({id:uid(),name,description});editingCategoryId=null;$("categoryName").value="";$("categoryDescription").value="";$("saveCategory").textContent="Сохранить рубрику";saveState();showAdmin("categories")}
+function startEditCategory(id){const c=state.categories.find(x=>x.id===id);if(!c)return;editingCategoryId=id;$("categoryName").value=c.name;$("categoryDescription").value=c.description||"";$("saveCategory").textContent="Сохранить изменения";$("categoryName").focus()}
+let savedEditorRange=null;
+function rememberEditorSelection(){
+ const editor=$("postBody"),sel=window.getSelection();
+ if(sel&&sel.rangeCount&&editor.contains(sel.anchorNode))savedEditorRange=sel.getRangeAt(0).cloneRange();
+}
+function restoreEditorSelection(){
+ const editor=$("postBody");editor.focus();
+ const sel=window.getSelection();
+ if(savedEditorRange&&sel){sel.removeAllRanges();sel.addRange(savedEditorRange);}
+}
+function applyFormat(format){
+ const editor=$("postBody");
+ restoreEditorSelection();
+ if(format==="link"){
+   const selected=window.getSelection()?.toString().trim();
+   if(!selected){alert("Сначала выделите текст, который должен стать ссылкой.");return;}
+   const url=prompt("Введите адрес ссылки:","https://");
+   if(!url)return;
+   let safeUrl=url.trim();
+   if(!/^(https?:|mailto:|tel:)/i.test(safeUrl)){alert("Ссылка должна начинаться с https://, http://, mailto: или tel:");return;}
+   document.execCommand("createLink",false,safeUrl);
+   editor.querySelectorAll("a").forEach(a=>{a.target="_blank";a.rel="noopener noreferrer";});
+   rememberEditorSelection();return;
+ }
+ const commands={bold:"bold",italic:"italic",underline:"underline",strikeThrough:"strikeThrough",ul:"insertUnorderedList",ol:"insertOrderedList",unlink:"unlink",justifyLeft:"justifyLeft",justifyCenter:"justifyCenter",undo:"undo",redo:"redo"};
+ if(format==="h2"||format==="h3"||format==="quote"){
+   document.execCommand("formatBlock",false,format==="quote"?"BLOCKQUOTE":format.toUpperCase());
+ }else if(commands[format]){
+   document.execCommand(commands[format],false,null);
+ }
+ rememberEditorSelection();
+}
+function insertImageData(dataUrl,altText){
+ const editor=$("postBody");restoreEditorSelection();
+ const img=document.createElement("img");img.src=dataUrl;img.alt=altText||"Изображение к статье";
+ const sel=window.getSelection();
+ if(savedEditorRange&&sel){
+   sel.removeAllRanges();sel.addRange(savedEditorRange);
+   const range=sel.getRangeAt(0);range.deleteContents();range.insertNode(img);
+   const after=document.createElement("p");after.innerHTML="<br>";img.after(after);
+   range.setStartAfter(after);range.collapse(true);sel.removeAllRanges();sel.addRange(range);
+ }else{
+   const p=document.createElement("p");p.appendChild(img);editor.appendChild(p);
+   const after=document.createElement("p");after.innerHTML="<br>";editor.appendChild(after);
+ }
+ rememberEditorSelection();
+}
+
+document.querySelectorAll("#publicNav button").forEach(b=>b.addEventListener("click",()=>showPublic(b.dataset.public)));
+document.querySelectorAll("[data-open-public]").forEach(b=>b.addEventListener("click",()=>showPublic(b.dataset.openPublic)));
+$("ownerButton").addEventListener("click",()=>{$("loginModal").classList.remove("hidden");$("loginError").classList.add("hidden");$("ownerPassword").value="";setTimeout(()=>$("ownerPassword").focus(),50)});
+$("cancelLogin").addEventListener("click",()=>$("loginModal").classList.add("hidden"));
+$("loginModal").addEventListener("click",e=>{if(e.target===$("loginModal"))$("loginModal").classList.add("hidden")});
+$("loginForm").addEventListener("submit",e=>{e.preventDefault();if($("ownerPassword").value===OWNER_PASSWORD){$("loginModal").classList.add("hidden");enterAdmin()}else $("loginError").classList.remove("hidden")});
+$("exitAdmin").addEventListener("click",exitAdmin);
+document.querySelectorAll("[data-admin]").forEach(b=>b.addEventListener("click",()=>showAdmin(b.dataset.admin)));
+$("newPost").addEventListener("click",newPost);$("newPostFromDashboard").addEventListener("click",newPost);$("cancelEditor").addEventListener("click",()=>showAdmin("posts"));$("saveDraft").addEventListener("click",()=>savePost("draft"));$("publishPost").addEventListener("click",()=>savePost("published"));$("quickAddCategory").addEventListener("click",()=>showAdmin("categories"));$("addCategory").addEventListener("click",()=>{editingCategoryId=null;$("categoryName").value="";$("categoryDescription").value="";$("saveCategory").textContent="Сохранить рубрику";$("categoryName").focus()});$("saveCategory").addEventListener("click",addCategory);$("adminPostSearch").addEventListener("input",renderPostsTable);$("publicSearch").addEventListener("input",renderPublic);
+document.querySelectorAll("[data-format]").forEach(b=>{
+ b.addEventListener("mousedown",e=>{e.preventDefault();rememberEditorSelection();});
+ b.addEventListener("click",()=>applyFormat(b.dataset.format));
+});
+$("postBody").addEventListener("keyup",rememberEditorSelection);
+$("postBody").addEventListener("mouseup",rememberEditorSelection);
+$("postBody").addEventListener("input",rememberEditorSelection);
+$("postImageInput").addEventListener("change",e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!file.type.startsWith("image/")){alert("Выберите файл изображения.");e.target.value="";return;}
+ if(file.size>1500000){alert("Файл слишком большой. Выберите изображение до 1,5 МБ, чтобы оно поместилось в хранилище браузера.");e.target.value="";return;}
+ const reader=new FileReader();
+ reader.onload=()=>insertImageData(reader.result,file.name);
+ reader.onerror=()=>alert("Не удалось прочитать изображение.");
+ reader.readAsDataURL(file);e.target.value="";
+});
+$("refreshAnalytics").addEventListener("click",renderAnalytics);
+$("clearAnalytics").addEventListener("click",()=>{if(confirm("Очистить статистику просмотров, сохранённую в этом браузере?")){localStorage.removeItem(ANALYTICS_KEY);renderAnalytics()}});
+$("saveSettings").addEventListener("click",()=>{state.settings.title=$("siteTitle").value.trim()||"Исламский Вестник Дома";state.settings.subtitle=$("siteSubtitle").value.trim()||"Газета для мусульманской семьи";saveState();alert("Настройки сохранены.")});
+$("exportData").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="islamic-gazette-backup.json";a.click();URL.revokeObjectURL(url)});
+document.addEventListener("click",e=>{
+ const edit=e.target.closest("[data-edit-post]");if(edit)editPost(edit.dataset.editPost);
+ const del=e.target.closest("[data-delete-post]");if(del&&confirm("Удалить эту статью?")){state.posts=state.posts.filter(p=>p.id!==del.dataset.deletePost);saveState()}
+ const ec=e.target.closest("[data-edit-category]");if(ec)startEditCategory(ec.dataset.editCategory);
+ const dc=e.target.closest("[data-delete-category]");if(dc&&confirm("Удалить рубрику? Статьи останутся, но будут без рубрики.")){state.categories=state.categories.filter(c=>c.id!==dc.dataset.deleteCategory);state.posts.forEach(p=>{if(p.categoryId===dc.dataset.deleteCategory)p.categoryId=""});saveState()}
+ const read=e.target.closest("[data-read-post]");if(read){openArticle(read.dataset.readPost)}
+ const cat=e.target.closest("[data-category-open]");if(cat){showPublic("articles");$("publicSearch").value="";renderPublic();const catId=cat.dataset.categoryOpen;const list=state.posts.filter(p=>p.status==="published"&&p.categoryId===catId);$("publicArticles").innerHTML=list.map(postCard).join("");$("publicArticlesEmpty").classList.toggle("hidden",list.length>0);$("publicSearch").classList.add("hidden")}
+ if(e.target.id==="backPublicArticles"){ $("publicArticleDetail").classList.add("hidden");$("publicArticles").classList.remove("hidden");$("publicSearch").classList.remove("hidden");renderPublic()}
+});
+/* Restore the article list/search when the reader revisits the articles tab. */
+document.querySelector('[data-public="articles"]').addEventListener("click",()=>{$("publicArticleDetail").classList.add("hidden");$("publicArticles").classList.remove("hidden");$("publicSearch").classList.remove("hidden");renderPublic()});
+renderAll();
+</script>
+</body>
+</html>
